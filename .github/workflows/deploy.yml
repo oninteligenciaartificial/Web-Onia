@@ -30,4 +30,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: /public_html/
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+          exclude: |
+            **/.next/**
+            **/node_modules/**
+            **/package.json
+            **/package-lock.json
+            **/.git/**
+            **/README.md
