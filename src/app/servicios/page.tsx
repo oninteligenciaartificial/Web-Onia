@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import RevealOnScroll from '../components/RevealOnScroll'
-import type { Metadata } from 'next'
 
 const services = [
   {
@@ -91,7 +90,7 @@ export default function ServiciosPage() {
       {/* Services Showcase */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 space-y-24">
-          {services.map((s, i) => (
+          {services.map((s) => (
             <RevealOnScroll key={s.id} delay={1}>
               <div id={s.id} className={`grid lg:grid-cols-2 gap-12 items-center ${s.reverse ? 'lg:direction-rtl' : ''}`}>
                 {/* Image */}
