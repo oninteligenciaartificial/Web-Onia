@@ -1,0 +1,5 @@
+# List Network Requests
+
+| reqid | method | url | status |
+|---|---|---|---|
+| 11 | GET | https://onia.com.bo/img/hero-bg.png | failed - 422 |

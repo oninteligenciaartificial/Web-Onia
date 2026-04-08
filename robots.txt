@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow build and config directories
+Disallow: /build/
+Disallow: /OnIA_Hostinger_Deploy/
+
+Sitemap: https://onia.com.bo/sitemap.xml
