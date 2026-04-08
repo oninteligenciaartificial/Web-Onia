@@ -38,3 +38,5 @@ jobs:
             **/package-lock.json
             **/.git/**
             **/README.md
+          dry-run: false
+          sftp: false
