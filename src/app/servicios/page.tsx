@@ -4,6 +4,48 @@ import Link from 'next/link'
 import Image from 'next/image'
 import RevealOnScroll from '../components/RevealOnScroll'
 
+const SaasVisual = () => (
+  <div className="w-full h-full bg-surface-container flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="absolute inset-0 grid-pattern opacity-30" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[60px]" />
+    <div className="relative z-10 w-full max-w-sm space-y-3">
+      {/* Top bar */}
+      <div className="glass-card rounded-xl p-4 flex items-center gap-3">
+        <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2DB542" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div className="flex-1 space-y-1.5">
+          <div className="h-2 bg-white/10 rounded w-3/4" />
+          <div className="h-2 bg-white/5 rounded w-1/2" />
+        </div>
+        <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full bg-primary" />
+        </div>
+      </div>
+      {/* Modules */}
+      <div className="grid grid-cols-2 gap-3">
+        {['CRM', 'Facturación', 'Inventario', 'Reportes'].map((mod, i) => (
+          <div key={mod} className="glass-card rounded-xl p-3 flex flex-col gap-2">
+            <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${i % 2 === 0 ? 'bg-primary/20' : 'bg-white/5'}`}>
+              <div className={`w-3 h-3 rounded ${i % 2 === 0 ? 'bg-primary' : 'bg-white/30'}`} />
+            </div>
+            <span className="text-[11px] font-semibold text-on-surface-variant">{mod}</span>
+            <div className="h-1 bg-white/10 rounded w-full" />
+          </div>
+        ))}
+      </div>
+      {/* Status bar */}
+      <div className="glass-card rounded-xl p-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-[11px] text-on-surface-variant">Sistema activo</span>
+        </div>
+        <span className="text-[11px] font-bold text-primary">Tu marca</span>
+      </div>
+    </div>
+  </div>
+)
+
 const services = [
   {
     id: 'esencial',
@@ -54,6 +96,24 @@ const services = [
     tags: ['E-commerce', 'Apps Web', 'SaaS', 'Proyectos escalables'],
     image: '/web-premium.jpg',
   },
+  {
+    id: 'saas',
+    number: '04',
+    label: 'SaaS Personalizado',
+    title: 'Software a la Medida de tu Negocio',
+    desc: 'Desarrollamos plataformas SaaS completamente adaptadas a los procesos únicos de tu empresa. Desde sistemas de gestión internos hasta herramientas que puedes ofrecer como servicio a tus propios clientes.',
+    features: [
+      'Módulos 100% configurables a tu flujo de trabajo',
+      'Panel de administración propio con tu marca',
+      'Base de datos segura y escalable en la nube',
+      'Acceso por roles: administrador, empleado, cliente',
+      'Integraciones con WhatsApp, pagos y APIs externas',
+      'Soporte continuo y actualizaciones incluidas',
+    ],
+    tags: ['Gestión interna', 'Facturación', 'CRM', 'Inventario', 'Reservas', 'Control de personal'],
+    visual: SaasVisual,
+    reverse: true,
+  },
 ]
 
 const processSteps = [
@@ -95,14 +155,20 @@ export default function ServiciosPage() {
               <div id={s.id} className={`grid lg:grid-cols-2 gap-12 items-center ${s.reverse ? 'lg:direction-rtl' : ''}`}>
                 {/* Image */}
                 <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] bg-surface-container-high group ${s.reverse ? 'lg:order-2' : ''}`}>
-                  <Image
-                    src={s.image}
-                    alt={`${s.title} — diseño web para negocios en Bolivia`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent" />
+                  {'visual' in s && s.visual ? (
+                    <s.visual />
+                  ) : (
+                    <>
+                      <Image
+                        src={(s as {image: string}).image}
+                        alt={`${s.title} — diseño web para negocios en Bolivia`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent" />
+                    </>
+                  )}
                 </div>
 
                 {/* Content */}
